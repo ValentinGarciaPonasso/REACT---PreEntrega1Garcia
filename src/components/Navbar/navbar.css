@@ -1,0 +1,69 @@
+.navBar {
+    background-color: black;
+    height: 10vh;
+    width: 100%;
+}
+
+.logo {
+    width: 300px;
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    display: flex;
+    align-items: center;
+    text-transform: none;
+    text-decoration: none;
+}
+.logo-escudo {
+    width: 130px;
+    height: 100%;
+    background-image: url(../../images/logo.jpg);
+    box-sizing: border-box;
+}
+.logo-nombre {
+    color: rgba(5, 107, 5, 0.993);
+    font-size: 22.4px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-nombre h1 {
+    font-size: 22.4px;
+}
+
+
+.listado {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+}
+
+li {
+    justify-self: center;
+    align-self: center;
+    gap: 20px;
+}
+
+.links {
+    text-align: center;
+    color: rgba(5, 107, 5, 0.993);
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.nav-link:hover{
+    color: white;
+}
+
+.nav-link:focus{
+    color: white;
+}

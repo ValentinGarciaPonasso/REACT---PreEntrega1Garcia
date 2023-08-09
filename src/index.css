@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+  text-transform: none;
+  text-decoration: none;  
+}
+
+body{
+  background: linear-gradient(270deg, rgb(6, 15, 5) 0%, rgb(18, 120, 26) 41%, rgb(58, 136, 8) 100%);
+}
