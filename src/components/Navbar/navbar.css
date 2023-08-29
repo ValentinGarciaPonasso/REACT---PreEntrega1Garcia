@@ -1,3 +1,7 @@
+*{
+    list-style-type: none;
+}
+
 .navBar {
     background-color: black;
     height: 10vh;
@@ -18,7 +22,7 @@
 .logo-escudo {
     width: 130px;
     height: 100%;
-    background-image: url(../../images/logo.jpg);
+    background-image: url(/images/logo.jpg);
     box-sizing: border-box;
 }
 .logo-nombre {
@@ -45,6 +49,7 @@
     justify-content: center;
     width: 100%;
     gap: 20px;
+    align-self: center;
 }
 
 li {
@@ -54,6 +59,7 @@ li {
 }
 
 .links {
+    text-decoration: none;
     text-align: center;
     color: rgba(5, 107, 5, 0.993);
     font-size: 1.2rem;
@@ -66,4 +72,10 @@ li {
 
 .nav-link:focus{
     color: white;
+}
+
+.carritoContainer{
+    width: 300px;
+    display: flex;
+    justify-content: center;
 }
