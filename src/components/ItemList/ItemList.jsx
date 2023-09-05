@@ -8,7 +8,12 @@ const listadoCategorias = ["Hombre", "Mujer", "Niños"];
 const ItemList = ({items, isLoading, categoria}) => {
 
     if (isLoading) {
-        return <h2 className={styles.mensajes}>Cargando...</h2>;
+        return <div className={styles.mensajes}>            
+            <img
+                src={`/images/imagen_carga.png`}
+            />
+            <h2 >Cargando...</h2>
+        </div>
     }
 
     if (!listadoCategorias.includes(categoria) && categoria != undefined  ) {

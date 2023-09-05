@@ -8,7 +8,6 @@ function App() {
   return(
     <div>
       <Navbar/>
-      {/* <ItemListContainer greeting={"Hola Mundo!"}/> */}
 
       <Routes>
         <Route path= "/" element={<ItemListContainer/>}/>
