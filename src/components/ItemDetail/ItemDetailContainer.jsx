@@ -1,8 +1,9 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { getProduct } from "../../services";
 import ItemDetail from "../ItemDetail/ItemDetail";
+import CartContext from "../../context/CartContext";
 
 
 const ItemDetailContainer = () => {
@@ -11,7 +12,7 @@ const ItemDetailContainer = () => {
     const [isLoading, setIsLoading] = useState (true);
     const {id} = useParams();
 
-
+    const { addItem, reducir, incrementar, count} = useContext(CartContext);
 
 
     useEffect(() => {
@@ -27,7 +28,14 @@ const ItemDetailContainer = () => {
         })
     }, [id]);
 
-    return <ItemDetail item={item} isLoading={isLoading}/>;
+    return <ItemDetail 
+        item={item}
+        isLoading={isLoading} 
+        addItem={addItem} 
+        reducir= {reducir} 
+        incrementar = {incrementar}
+        count= {count}
+    />;
 };
 
 export default ItemDetailContainer;

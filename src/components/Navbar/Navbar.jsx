@@ -6,11 +6,11 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-xl">
             <div className="container-fluid navBar">
-                <Link to= "/" class="logo" aria-label="Pagina de inicio">
-                    <div class="logo-nombre">
+                <Link to= "/" className="logo" aria-label="Pagina de inicio">
+                    <div className="logo-nombre">
                         <h1>C.A. FAVOR REINTENTAR SHOP</h1>
                     </div>
-                    <div class="logo-escudo"/>
+                    <div className="logo-escudo"/>
                 </Link>
                 <div id="navbarSupportedContent">
                     <ul className="listado">

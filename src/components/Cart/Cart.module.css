@@ -1,0 +1,142 @@
+.carrito {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    align-self: flex-start;
+    margin: 10px 0 20px 20px;
+}
+
+h2 {
+    align-self: flex-start;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #4f7457da;
+    width: 90%;
+    align-items: space-between;
+    margin: 10px 0 20px 0;
+    padding: 10px;
+}
+
+.subtitulos {
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    align-items: center;
+    justify-content: center;
+}
+
+.productos {
+    margin: 0;
+    padding: 0;
+
+}
+
+.producto {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    gap: 0;
+    align-items: center;
+    justify-items: start;
+    margin: 0 0 20px 0;
+}
+
+.precio {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+}
+
+.datos {
+    display: flex;
+    justify-self: flex-start;
+    align-self: center;
+    gap: 20px;
+}
+
+.datosDescr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.datosDescr h4{
+    color: black;
+    font-weight: bold;
+}
+
+.datosDescr h5{
+    color: black;
+    font-weight:normal;
+}
+
+.datosDescr p{
+    color: black;
+    font-weight: normal;
+}
+
+
+
+.imagenCart {
+    width: 200px;
+    height: 300px;
+}
+
+.imagenCart img {
+    width: 200px;
+    height: 300px;
+    border: 2px solid black;
+}
+
+.contadorContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+    gap: 10px;
+    max-width: 200px;
+    font-weight: bold;
+}
+
+.contadorButton {
+    background-color: #198754;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.contadorButton:hover {
+    background-color: #146c43;
+    color: white;
+}
+
+.totales {
+    display: flex;
+    justify-content: space-around;
+}
+
+.linkStyle {
+    text-decoration: none;
+    /* Quitar la decoración del enlace */
+    color: inherit;
+    /* Heredar el color del texto del contenedor */
+}

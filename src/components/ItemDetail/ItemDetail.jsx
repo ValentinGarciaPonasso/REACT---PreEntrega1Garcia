@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 
 
 
-const ItemDetail = ({ item, isLoading }) => {
+
+
+const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir }) => {
 
     const [selectedImage, setSelectedImage] = useState(null);
     useEffect(() => {
@@ -17,8 +19,10 @@ const ItemDetail = ({ item, isLoading }) => {
         setSelectedImage(imageSrc);
     };
 
+
+
     if (isLoading) {
-        return <div className={styles.mensajes}>            
+        return <div className={styles.mensajes}>
             <img
                 src={`/images/imagen_carga.png`}
             />
@@ -62,7 +66,7 @@ const ItemDetail = ({ item, isLoading }) => {
                 <p>{item.descripcion1}</p>
                 <p>{item.descripcion2}</p>
                 <p>{item.descripcion3}</p>
-                <p className={styles.codigo}>Codigo: {item.codigo}</p>
+                <p className={styles.codigo}>Codigo: {item.id}</p>
                 <hr />
                 <h4>Talles:</h4>
                 <div className={styles.talles}>
@@ -71,8 +75,14 @@ const ItemDetail = ({ item, isLoading }) => {
                     <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true">L</button>
                     <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true">XL</button>
                 </div>
+                <h4>Cantidad: </h4>
+                <div className= {styles.contadorContainer}>
+                    <button className={styles.contadorButton} onClick={reducir}>-</button>
+                    <span className={styles.contadorNumero}>{count}</span>
+                    <button className={styles.contadorButton} onClick={incrementar}>+</button>
+                </div>
                 <div className={styles.comprar}>
-                    <button className="btn btn-danger">COMPRAR</button>
+                    <button className="btn btn-danger" onClick={() => addItem(item, count)}>Agregar al carrito</button>
                 </div>
             </div >
         </div>
@@ -81,7 +91,11 @@ const ItemDetail = ({ item, isLoading }) => {
 
 ItemDetail.propTypes = {
     item: PropTypes.object,
+    count: PropTypes.number,
     isLoading: PropTypes.bool,
+    addItem: PropTypes.func,
+    incrementar: PropTypes.func,
+    reducir: PropTypes.func,
 };
 
 export default ItemDetail;

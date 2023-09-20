@@ -152,7 +152,52 @@ p {
     height: 60px;
 }
 
-.codigo{
+.codigo {
     font-weight: lighter;
     font-size: 0.8rem;
+}
+
+
+
+.contadorButton {
+    background-color: #198754;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.contadorButton:hover {
+    background-color: #146c43;
+    color: white;
+}
+
+.contadorNumero {
+    display: block;
+    flex: 1; /* Ocupa todo el espacio disponible */
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100px;
+    height: 100%;
+    background-color: #198754;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.contadorContainer {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    gap: 10px;
+    max-width: 200px; /* Ajusta según tu necesidad */
+    margin: 0 auto; /* Centra el contenido */
 }
