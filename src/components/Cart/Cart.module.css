@@ -1,15 +1,17 @@
 .carrito {
-    height: 100%;
-    margin: 0;
+    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-self: start;
+    align-self: start;
+    margin-top: 20px;
 }
 
 h1 {
     align-self: flex-start;
-    margin: 10px 0 20px 20px;
+    margin: 0 0 20px 20px;
 }
 
 h2 {
@@ -20,11 +22,13 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: #4f7457da;
+    background-color: #5a705fda;
     width: 90%;
     align-items: space-between;
     margin: 10px 0 20px 0;
     padding: 10px;
+    border-radius: 8px;
+    box-shadow: 10px 5px 5px black;
 }
 
 .subtitulos {
@@ -99,6 +103,7 @@ h2 {
     width: 200px;
     height: 300px;
     border: 2px solid black;
+    box-shadow: 6px 3px 3px black;
 }
 
 .contadorContainer {
@@ -109,6 +114,7 @@ h2 {
     gap: 10px;
     max-width: 200px;
     font-weight: bold;
+    height: 47px;
 }
 
 .contadorButton {
@@ -129,9 +135,27 @@ h2 {
     color: white;
 }
 
+.contadorNumero {
+    display: block;
+    flex: 1; /* Ocupa todo el espacio disponible */
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100px;
+    height: 100%;
+    background-color: #198754;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center;
+    box-sizing: border-box;
+}
+
 .totales {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    height: 80px;
 }
 
 .linkStyle {
@@ -139,4 +163,37 @@ h2 {
     /* Quitar la decoración del enlace */
     color: inherit;
     /* Heredar el color del texto del contenedor */
+    width: 180px;
+    height: 50px;
+    align-self: center;
+    justify-self: center;
+    color: black;
+    font-weight: bold;
+}
+
+.totales button{
+    width: 180px;
+    height: 50px;
+    align-self: center;
+    justify-self: center;
+    color: black;
+    font-weight: bold;
+}
+
+/* CUANDO NO HAY PRODUCTOS */
+
+
+.sinProductos{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.inicio{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }

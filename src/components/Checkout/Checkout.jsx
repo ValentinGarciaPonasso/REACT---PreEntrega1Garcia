@@ -3,6 +3,8 @@ import CartContext from "../../context/CartContext"
 import { cartTotal, mapCartToOrder } from "../../utilis"
 import { serverTimestamp } from "firebase/firestore"
 import { createOrder } from "../../services";
+import styles from "./Checkout.module.css";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
 
@@ -29,19 +31,24 @@ const Checkout = () => {
     const handleCheckout = () => {
         setValidateForm(false);
         setValidateEmail(false);
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         // Validar que los campos no estén vacíos
         if (!formData.name || !formData.email || !formData.phone) {
             console.log('Por favor, complete todos los campos.');
             setValidateForm(true);
+            // Validar el formato del email
+            if (!emailPattern.test(formData.email)) {
+                console.log('Por favor, ingrese un correo electrónico válido.');
+                setValidateEmail(true);
+                return;
+            }
             return;
-        }    
-        // Validar el formato del email (puedes usar expresiones regulares)
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(formData.email)) {
+        } else if (!emailPattern.test(formData.email)) {
             console.log('Por favor, ingrese un correo electrónico válido.');
             setValidateEmail(true);
             return;
         }
+
         const order = {
             buyer: {
                 name: formData.name,
@@ -72,75 +79,100 @@ const Checkout = () => {
     };
 
     const handleSubmit = (event) => {
-        console.log("handleSubmit" , formData);
+        console.log("handleSubmit", formData);
         event.preventDefault();
     }
 
 
+
     return (
         <div>
+            {/* COMPRA EXITOSA */}
             {orderId && (
                 <>
                     <div className="container">
-                        <h1>Resumen de compra</h1>
-                        <div>
-                            <h2>COMPRA EXITOSA!!!</h2>
-                            <p>El ID de su orden es: {orderId}</p>
-                        </div>
-                        <div>
-                            <div>
-                                <h3>Productos:</h3>
-                                <ul>
-                                    {orderAux.items.map((item) => (
-                                        <li key={item.id}>
-                                            <p>{item.title} {item.category}</p>
-                                            <p>Cantidad: {item.quantity}</p>
-                                            <p>Precio unitario: ${item.price}</p>
-                                            <p>Subtotal: ${item.price * item.quantity}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <p>Total: ${orderAux.total}</p>
+                        <div className={styles.resumen}>
+                            <h1>Resumen de compra</h1>
+                            <div className={styles.idOrden}>
+                                <h2>COMPRA EXITOSA!!!</h2>
+                                <p>El ID de su orden es: {orderId}</p>
                             </div>
-                            <div>
-                                <h3>Datos del comprador:</h3>
-                                <ul>
-                                    <li><p>Nombre: {orderAux.buyer.name}</p></li>
-                                    <li><p>Email: {orderAux.buyer.email}</p></li>
-                                    <li><p>Teléfono: {orderAux.buyer.phone}</p></li>
-                                </ul>
-                            </div>
+                                <div className={styles.idOrden}>
+                                    <h3>Productos:</h3>
+                                    <ul>
+                                        {orderAux.items.map((item) => (
+                                            <li key={item.id} className={styles.productos}>
+                                                <p>{item.title} {item.category}</p>
+                                                <p>Cantidad: {item.quantity}</p>
+                                                <p>Talle: </p>
+                                                <p>Precio unitario: ${item.price}</p>
+                                                <p>Subtotal: ${item.price * item.quantity}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p>Total: ${orderAux.total}</p>
+                                </div>
+                                <div className={styles.idOrden}>
+                                    <h3>Datos del comprador:</h3>
+                                    <ul>
+                                        <li><p>Nombre: {orderAux.buyer.name}</p></li>
+                                        <li><p>Email: {orderAux.buyer.email}</p></li>
+                                        <li><p>Teléfono: {orderAux.buyer.phone}</p></li>
+                                    </ul>
+                                </div>
+                            
                         </div>
                     </div>
                 </>
             )};
 
-            {!orderId && (
+
+            {/* NO SE ENCUENTRAN PRODUCTOS */}
+            {!orderId && !total && (
                 <>
-                    <div className="container">
+                    <div className={styles.sinProductos}>
+                        <h2>CHECKOUT</h2>
+                        <h3>NO SE ENCONTRARON PRODUCTOS</h3>
+                        <Link to="/" className={styles.inicio}>Volver al inicio</Link>
+                    </div>
+                </>
+            )}
+
+            {/* SE ENCUENTRAN PRODUCTOS */}
+            {!orderId && !!total && (
+                <>
+                    <div className={styles.checkout}>
                         <h1>Checkout</h1>
-                        <div className="container">
+                        <div className={styles.container}>
                             <h2>Productos:</h2>
                             <ul>
                                 {cart.map((item) => (
-                                    <li key={item.id}>
-                                        <p>{item.name} {item.category}</p>
-                                        <p>Cantidad: {item.quantity}</p>
-                                        <p>Precio unitario: ${item.price}</p>
-                                        <p>Subtotal: ${item.price * item.quantity}</p>
+                                    <li key={item.id} className={styles.producto}>
+                                        <div>
+                                            <p>{item.name} {item.category}</p>
+                                            <p>Cantidad: {item.quantity}</p>
+                                            <p>Precio unitario: ${item.price}</p>
+                                            <p>Subtotal: ${item.price * item.quantity}</p>
+                                        </div>
+                                        <Link to={`/item/${item.id}`} className={styles.imagenCart}>
+                                            <img
+                                                src={`/images/productos/producto-${item.id}.jpg`}
+                                                alt={item.name}
+                                            />
+                                        </Link>
                                         <br />
                                         <hr />
                                         <br />
                                     </li>
                                 ))}
                             </ul>
-                            <p>TOTAL: ${total}</p>
+                            <h3>TOTAL: ${total}</h3>
                         </div>
-                        <div className="container">
+                        <div className={styles.container}>
                             <h2>Ingrese sus datos:</h2>
-                            <form onSubmit={handleSubmit}>
-                                <div>
-                                    <label htmlFor="name">Nombre</label>
+                            <form onSubmit={handleSubmit} className={styles.form}>
+                                <div className={styles.formItem}>
+                                    <label htmlFor="name">Nombre Completo</label>
                                     <input
                                         type="text"
                                         name="name"
@@ -149,7 +181,7 @@ const Checkout = () => {
                                         onChange={handleChangeForm}
                                     />
                                 </div>
-                                <div>
+                                <div className={styles.formItem}>
                                     <label htmlFor="email">Email</label>
                                     <input
                                         type="email"
@@ -159,7 +191,7 @@ const Checkout = () => {
                                         onChange={handleChangeForm}
                                     />
                                 </div>
-                                <div>
+                                <div className={styles.formItem}>
                                     <label htmlFor="phone">Teléfono</label>
                                     <input
                                         type="phone"
@@ -169,10 +201,15 @@ const Checkout = () => {
                                         onChange={handleChangeForm}
                                     />
                                 </div>
-                                <button type= "submit" onClick={handleCheckout} className="btn btn-danger">FINALIZAR COMPRA</button>
+                                <div className={styles.formButton}>
+                                    {validateForm && <p>Por favor, complete todos los campos.</p>}
+                                    {validateEmail && <p>Por favor, ingrese un correo electrónico válido.</p>}
+                                    <button type="submit" onClick={handleCheckout} className="btn btn-danger">FINALIZAR COMPRA</button>
+                                    <Link to="/cart" aria-label="Carrito" className={styles.carrito}>
+                                        <button type="submit" className="btn btn-primary">VOLVER AL CARRITO</button>
+                                    </Link>
+                                </div>
                             </form>
-                            {validateForm && <p>Por favor, complete todos los campos.</p>}
-                            {validateEmail && <p>Por favor, ingrese un correo electrónico válido.</p>}
                         </div>
                         {isLoading && <p>Procesando compra...</p>}
                     </div>

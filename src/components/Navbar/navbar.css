@@ -2,10 +2,19 @@
     list-style-type: none;
 }
 
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-sizing: border-box;
+    padding: 0;
+}
+
 .navBar {
     background-color: black;
     height: 10vh;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .logo {
