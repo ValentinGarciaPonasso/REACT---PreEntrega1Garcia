@@ -7,10 +7,7 @@ const CartProvider = ({children}) => {
     const [count, setCount] = useState (0);
 
     const isInCart = (code) => {
-        console.log(code);
-        console.log(cart);
         const itemInCart = cart.find((item) => item.code === code);
-        console.log("Buscando item en carrito, resultado:", !!itemInCart);
         return !!itemInCart
     };
 

@@ -1,4 +1,4 @@
-import { doc, getDoc, collection, getDocs, getFirestore, query, where, addDoc, orderBy } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, getFirestore, query, where, addDoc, orderBy,updateDoc } from "firebase/firestore";
 
 
 export const getProduct = (id) => {
@@ -63,22 +63,23 @@ export const createOrder = (orden) => {
 
 
 
-export const updateOrder = () => {
+export const updateStock = (items) => {
     // Obtener la instancia de Firestore
     const db = getFirestore();
 
 
     //Obtener la referencia al Documento
     items.map((item) => {
+        const orderDoc = doc(db, "items", item.id);
+        console.log(item);
+        console.log(orderDoc);
         switch (item.talle) {
-            case "S":
-                const orderDoc = doc(db, "items", item.id);
-
+            case "S":                
                 //Actualizamos el Documento
-                updateDoc(orderDoc, { stockS: -1 })
+                const stockSAuxliar = item.stockS - item.quantity;
+                updateDoc(orderDoc, { stockS: stockSAuxliar })
                     .then(() => {
                         console.log("Orden actualizada");
-                        alert("Orden actualizada");
                     })
                     .catch((error) => {
                         console.error("Error al actualizar la orden: ", error);
@@ -86,29 +87,44 @@ export const updateOrder = () => {
                     );
                 break;
             case "M":
-                setTalle({ ...talle[1], m: valor, cant: talle.cant + cant });
+                //Actualizamos el Documento
+                const stockMAuxliar = item.stockM - item.quantity;
+                updateDoc(orderDoc, { stockM: stockMAuxliar })
+                    .then(() => {
+                        console.log("Orden actualizada");
+                    })
+                    .catch((error) => {
+                        console.error("Error al actualizar la orden: ", error);
+                    }
+                    );
                 break;
             case "L":
-                setTalle({ ...talle[2], l: valor, cant: talle.cant + cant });
+                //Actualizamos el Documento
+                const stockLAuxliar = item.stockL - item.quantity;
+                updateDoc(orderDoc, { stockL: stockLAuxliar })
+                    .then(() => {
+                        console.log("Orden actualizada");
+                    })
+                    .catch((error) => {
+                        console.error("Error al actualizar la orden: ", error);
+                    }
+                    );
                 break;
             case "XL":
-                setTalle({ ...talle[3], xl: valor, cant: talle.cant + cant });
+                //Actualizamos el Documento
+                const stockXLAuxliar = item.stockXL - item.quantity;
+                updateDoc(orderDoc, { stockXL: stockXLAuxliar })
+                    .then(() => {
+                        console.log("Orden actualizada");
+                    })
+                    .catch((error) => {
+                        console.error("Error al actualizar la orden: ", error);
+                    }
+                    );
                 break;
             default:
                 break;
         }
+        console.log(items);
     })
-
-    const orderDoc = doc(db, "items", orderId);
-
-    //Actualizamos el Documento
-    updateDoc(orderDoc, { total: 2000 })
-        .then(() => {
-            console.log("Orden actualizada");
-            alert("Orden actualizada");
-        })
-        .catch((error) => {
-            console.error("Error al actualizar la orden: ", error);
-        }
-        );
 }

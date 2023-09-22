@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import CartContext from "../../context/CartContext"
 import { cartTotal, mapCartToOrder } from "../../utilis"
 import { serverTimestamp } from "firebase/firestore"
-import { createOrder } from "../../services";
+import { createOrder, updateStock } from "../../services";
 import styles from "./Checkout.module.css";
 import { Link } from "react-router-dom";
 
@@ -201,7 +201,7 @@ const Checkout = () => {
                                 <div className={styles.formButton}>
                                     {validateForm && <p>Por favor, complete todos los campos.</p>}
                                     {validateEmail && <p>Por favor, ingrese un correo electrónico válido.</p>}
-                                    <button type="submit" onClick={handleCheckout} className="btn btn-danger">FINALIZAR COMPRA</button>
+                                    <button type="submit" onClick={() => {handleCheckout(); updateStock(cart)}} className="btn btn-danger">FINALIZAR COMPRA</button>
                                     <Link to="/cart" aria-label="Carrito" className={styles.carrito}>
                                         <button type="submit" className="btn btn-primary">VOLVER AL CARRITO</button>
                                     </Link>
