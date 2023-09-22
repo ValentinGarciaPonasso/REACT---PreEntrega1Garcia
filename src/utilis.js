@@ -20,5 +20,6 @@ export const mapCartToOrder = (cart) => {
             price: item.price,
             quantity: item.quantity,
             category: item.category,
+            talle: item.talle,
     }));
 };

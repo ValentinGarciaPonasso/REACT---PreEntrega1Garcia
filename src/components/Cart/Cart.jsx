@@ -5,11 +5,10 @@ import { cartTotal } from "../../utilis";
 import styles from "./Cart.module.css";
 
 
-const Cart = () => {
+const Cart = ({}) => {
 
     const { cart, clear, removeItem, sumQuantity, substarctQuantity } = useContext(CartContext);
     const total = cartTotal(cart);
-
 
 
     return (
@@ -37,7 +36,7 @@ const Cart = () => {
                         <hr />
                         <ul className={styles.productos}>
                             {cart.map((item) => (
-                                <li key={item.id} className={styles.producto}>
+                                <li key={item.id + item.talle} className={styles.producto}>
                                     <div className={styles.datos}>
                                         <Link to={`/item/${item.id}`} className={styles.imagenCart}>
                                             <img
@@ -47,8 +46,8 @@ const Cart = () => {
                                         </Link>
                                         <div className={styles.datosDescr}>
                                             <h4>{item.name} {item.category}</h4>
-                                            <h5>Talle </h5>
-                                            <p>Codigo: {item.id}</p>
+                                            <h5>Talle: {item.talle} </h5>
+                                            <p>Codigo: {item.code}</p>
                                         </div>
                                     </div>
                                     <div className={styles.contadorContainer}>

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 
 
-const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir }) => {
+const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir, toggleTalle, talle }) => {
 
     const [selectedImage, setSelectedImage] = useState(null);
     useEffect(() => {
@@ -22,13 +22,15 @@ const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir }) =
 
 
     if (isLoading) {
-        return <div className={styles.mensajes}>
-            <img
-                src={`/images/imagen_carga.png`}
-            />
-            <h2 >Cargando...</h2>
+        return <div className={styles.contenedor}>
+            <div className={styles.circleLoader}></div>
+            <div className={styles.mensajes}>
+                <img
+                    src={`/images/imagen_carga.png`}
+                />
+                <h2 >Cargando...</h2>
+            </div>
         </div>
-
     }
 
     if (!item) {
@@ -68,21 +70,25 @@ const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir }) =
                 <p>{item.descripcion3}</p>
                 <p className={styles.codigo}>Codigo: {item.id}</p>
                 <hr />
-                <h4>Talles:</h4>
-                <div className={styles.talles}>
-                    <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true">S</button>
-                    <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true">M</button>
-                    <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true">L</button>
-                    <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true">XL</button>
-                </div>
                 <h4>Cantidad: </h4>
                 <div className= {styles.contadorContainer}>
                     <button className={styles.contadorButton} onClick={reducir}>-</button>
                     <span className={styles.contadorNumero}>{count}</span>
                     <button className={styles.contadorButton} onClick={incrementar}>+</button>
                 </div>
+                {/* <div className={styles.tallesError}> */}
+                <h4>Talle:</h4>
+                <div className={styles.talles}>
+                    <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true"  onClick={() => toggleTalle('S')}>S</button>
+                    <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true"  onClick={() => toggleTalle('M')}>M</button>
+                    <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true"  onClick={() => toggleTalle('L')}>L</button>
+                    <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true" onClick={() => toggleTalle('XL')}>XL</button>
+                </div>
+                {/* <p>el talle es: S {talle[0].cant}, M{talle[1].cant}, L{talle[2].cant}, XL{talle[3].cant}</p> */}
+                <p>El talle es: {talle}</p>
+                {/* </div> */}
                 <div className={styles.comprar}>
-                    <button className="btn btn-danger" onClick={() => addItem(item, count)}>Agregar al carrito</button>
+                    <button className="btn btn-danger" onClick={() => addItem(item, count, talle)}>Agregar al carrito</button>
                 </div>
             </div >
         </div>
@@ -96,6 +102,7 @@ ItemDetail.propTypes = {
     addItem: PropTypes.func,
     incrementar: PropTypes.func,
     reducir: PropTypes.func,
+    // talle: PropTypes.object,
 };
 
 export default ItemDetail;

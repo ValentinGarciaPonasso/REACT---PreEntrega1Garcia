@@ -15,7 +15,7 @@ export const getProduct = (id) => {
                     resolve(null);
                 }
             })
-            .catch ((error) => {
+            .catch((error) => {
                 reject(error);
             });
     });
@@ -58,5 +58,57 @@ export const createOrder = (orden) => {
 
     const ordenCollection = collection(db, "orders");
 
-    return  addDoc(ordenCollection, orden);
+    return addDoc(ordenCollection, orden);
 };
+
+
+
+export const updateOrder = () => {
+    // Obtener la instancia de Firestore
+    const db = getFirestore();
+
+
+    //Obtener la referencia al Documento
+    items.map((item) => {
+        switch (item.talle) {
+            case "S":
+                const orderDoc = doc(db, "items", item.id);
+
+                //Actualizamos el Documento
+                updateDoc(orderDoc, { stockS: -1 })
+                    .then(() => {
+                        console.log("Orden actualizada");
+                        alert("Orden actualizada");
+                    })
+                    .catch((error) => {
+                        console.error("Error al actualizar la orden: ", error);
+                    }
+                    );
+                break;
+            case "M":
+                setTalle({ ...talle[1], m: valor, cant: talle.cant + cant });
+                break;
+            case "L":
+                setTalle({ ...talle[2], l: valor, cant: talle.cant + cant });
+                break;
+            case "XL":
+                setTalle({ ...talle[3], xl: valor, cant: talle.cant + cant });
+                break;
+            default:
+                break;
+        }
+    })
+
+    const orderDoc = doc(db, "items", orderId);
+
+    //Actualizamos el Documento
+    updateDoc(orderDoc, { total: 2000 })
+        .then(() => {
+            console.log("Orden actualizada");
+            alert("Orden actualizada");
+        })
+        .catch((error) => {
+            console.error("Error al actualizar la orden: ", error);
+        }
+        );
+}

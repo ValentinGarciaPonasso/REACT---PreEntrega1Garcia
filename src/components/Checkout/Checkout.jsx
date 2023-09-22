@@ -34,17 +34,14 @@ const Checkout = () => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         // Validar que los campos no estén vacíos
         if (!formData.name || !formData.email || !formData.phone) {
-            console.log('Por favor, complete todos los campos.');
             setValidateForm(true);
             // Validar el formato del email
             if (!emailPattern.test(formData.email)) {
-                console.log('Por favor, ingrese un correo electrónico válido.');
                 setValidateEmail(true);
                 return;
             }
             return;
         } else if (!emailPattern.test(formData.email)) {
-            console.log('Por favor, ingrese un correo electrónico válido.');
             setValidateEmail(true);
             return;
         }
@@ -79,7 +76,6 @@ const Checkout = () => {
     };
 
     const handleSubmit = (event) => {
-        console.log("handleSubmit", formData);
         event.preventDefault();
     }
 
@@ -97,30 +93,30 @@ const Checkout = () => {
                                 <h2>COMPRA EXITOSA!!!</h2>
                                 <p>El ID de su orden es: {orderId}</p>
                             </div>
-                                <div className={styles.idOrden}>
-                                    <h3>Productos:</h3>
-                                    <ul>
-                                        {orderAux.items.map((item) => (
-                                            <li key={item.id} className={styles.productos}>
-                                                <p>{item.title} {item.category}</p>
-                                                <p>Cantidad: {item.quantity}</p>
-                                                <p>Talle: </p>
-                                                <p>Precio unitario: ${item.price}</p>
-                                                <p>Subtotal: ${item.price * item.quantity}</p>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <p>Total: ${orderAux.total}</p>
-                                </div>
-                                <div className={styles.idOrden}>
-                                    <h3>Datos del comprador:</h3>
-                                    <ul>
-                                        <li><p>Nombre: {orderAux.buyer.name}</p></li>
-                                        <li><p>Email: {orderAux.buyer.email}</p></li>
-                                        <li><p>Teléfono: {orderAux.buyer.phone}</p></li>
-                                    </ul>
-                                </div>
-                            
+                            <div className={styles.idOrden}>
+                                <h3>Productos:</h3>
+                                <ul>
+                                    {orderAux.items.map((item) => (
+                                        <li key={item.id + item.talle} className={styles.productos}>
+                                            <p>{item.title} {item.category}</p>
+                                            <p>Cantidad: {item.quantity}</p>
+                                            <p>Talle: {item.talle} </p>
+                                            <p>Precio unitario: ${item.price}</p>
+                                            <p>Subtotal: ${item.price * item.quantity}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <p>Total: ${orderAux.total}</p>
+                            </div>
+                            <div className={styles.idOrden}>
+                                <h3>Datos del comprador:</h3>
+                                <ul>
+                                    <li><p>Nombre: {orderAux.buyer.name}</p></li>
+                                    <li><p>Email: {orderAux.buyer.email}</p></li>
+                                    <li><p>Teléfono: {orderAux.buyer.phone}</p></li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                 </>
@@ -147,9 +143,10 @@ const Checkout = () => {
                             <h2>Productos:</h2>
                             <ul>
                                 {cart.map((item) => (
-                                    <li key={item.id} className={styles.producto}>
+                                    <li key={item.id + item.talle} className={styles.producto}>
                                         <div>
                                             <p>{item.name} {item.category}</p>
+                                            <p>Talle: {item.talle}</p>
                                             <p>Cantidad: {item.quantity}</p>
                                             <p>Precio unitario: ${item.price}</p>
                                             <p>Subtotal: ${item.price * item.quantity}</p>
@@ -211,7 +208,25 @@ const Checkout = () => {
                                 </div>
                             </form>
                         </div>
-                        {isLoading && <p>Procesando compra...</p>}
+                        {/* {isLoading && <p>Procesando compra...</p>} */}
+                        {isLoading && (
+                            <div className={styles.contenedor}>
+                                <div className={styles.circleLoader}></div>
+                                <div className={styles.mensajes}>
+                                    <img
+                                        src={`/images/imagen_carga.png`}
+                                    />
+                                    <h2 >Procesando...</h2>
+                                </div>
+                            </div>
+                        )}
+
+
+
+
+
+
+
                     </div>
                 </>
             )}
