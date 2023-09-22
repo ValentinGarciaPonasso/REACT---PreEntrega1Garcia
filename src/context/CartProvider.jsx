@@ -24,8 +24,6 @@ const CartProvider = ({ children }) => {
             const itemInCart = isInCart(code);
             //evaluamos si existe
             if (itemInCart) {
-                console.log("cart: ", cart);
-                console.log("product: ", product.code);
                 const newCart = cart.map((item) => {
                     if (item.code === code) {
                         return {
