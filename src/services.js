@@ -71,8 +71,6 @@ export const updateStock = (items) => {
     //Obtener la referencia al Documento
     items.map((item) => {
         const orderDoc = doc(db, "items", item.id);
-        console.log(item);
-        console.log(orderDoc);
         switch (item.talle) {
             case "S":                
                 //Actualizamos el Documento
@@ -125,6 +123,5 @@ export const updateStock = (items) => {
             default:
                 break;
         }
-        console.log(items);
     })
 }

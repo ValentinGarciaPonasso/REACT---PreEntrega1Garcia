@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 
 
-const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir, toggleTalle, talle }) => {
+const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir, toggleTalle, talle, validateTalle }) => {
 
     const [selectedImage, setSelectedImage] = useState(null);
     useEffect(() => {
@@ -76,7 +76,6 @@ const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir, tog
                     <span className={styles.contadorNumero}>{count}</span>
                     <button className={styles.contadorButton} onClick={incrementar}>+</button>
                 </div>
-                {/* <div className={styles.tallesError}> */}
                 <h4>Talle:</h4>
                 <div className={styles.talles}>
                     <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true"  onClick={() => toggleTalle('S')}>S</button>
@@ -84,9 +83,8 @@ const ItemDetail = ({ item, isLoading, addItem, count, incrementar, reducir, tog
                     <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true"  onClick={() => toggleTalle('L')}>L</button>
                     <button className="btn btn-success" data-bs-toggle="button" aria-pressed="true" onClick={() => toggleTalle('XL')}>XL</button>
                 </div>
-                {/* <p>el talle es: S {talle[0].cant}, M{talle[1].cant}, L{talle[2].cant}, XL{talle[3].cant}</p> */}
-                <p>El talle es: {talle}</p>
-                {/* </div> */}
+                {validateTalle && <p>Talle seleccionado: {talle}</p>}
+                {!validateTalle && <p>Seleccione un talle</p>}                
                 <div className={styles.comprar}>
                     <button className="btn btn-danger" onClick={() => addItem(item, count, talle)}>Agregar al carrito</button>
                 </div>
@@ -102,7 +100,6 @@ ItemDetail.propTypes = {
     addItem: PropTypes.func,
     incrementar: PropTypes.func,
     reducir: PropTypes.func,
-    // talle: PropTypes.object,
 };
 
 export default ItemDetail;

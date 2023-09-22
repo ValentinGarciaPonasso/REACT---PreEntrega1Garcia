@@ -5,6 +5,8 @@ import { serverTimestamp } from "firebase/firestore"
 import { createOrder, updateStock } from "../../services";
 import styles from "./Checkout.module.css";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Checkout = () => {
 
@@ -63,6 +65,16 @@ const Checkout = () => {
                 setOrderId(docRef.id);
                 setIsLoading(false);
                 clear();
+                toast.success('🦄 Wow so easy!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    });
             });
     };
 
@@ -207,8 +219,8 @@ const Checkout = () => {
                                     </Link>
                                 </div>
                             </form>
+                            <ToastContainer />
                         </div>
-                        {/* {isLoading && <p>Procesando compra...</p>} */}
                         {isLoading && (
                             <div className={styles.contenedor}>
                                 <div className={styles.circleLoader}></div>
